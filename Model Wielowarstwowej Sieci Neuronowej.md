@@ -83,7 +83,7 @@ Zamiast domyślnego progu 0.5 przeanalizowano różne wartości threshold w celu
 
 Domyślny próg klasyfikacji (0.5) obniżono do wartości 0.4, co pozwoliło uzyskać najlepszy kompromis pomiędzy kluczowymi metrykami jakości, w szczególności precision i recall.
 
-### Wyniki modelu - tabela metryk
+### 5. Wyniki modelu - tabela metryk
 
 | **Metryka** | **Wartość** |
 | --- | --- |
@@ -116,7 +116,7 @@ Wartość **F1-score (~0.56)** potwierdza umiarkowany, ale stabilny kompromis po
 weighted avg       0.89      0.88      0.88      2676
 ```
 
-### Macierz pomyłek dla modelu predykcji podium F1
+**Macierz pomyłek dla modelu predykcji podium F1**
 
 W celu dogłębnej analizy struktury błędów wygenerowano macierz pomyłek (Confusion Matrix)
 
@@ -127,7 +127,7 @@ Macierz przedstawia, że na 2336 przypadków braku podium, model prawidłowo wsk
 
 W klasie pozytywnej model poprawnie przewidział 208 podiów (True Positives), natomiast popełnił 132 błędy II rodzaju (False Negatives – nie wykrył podium) oraz 189 błędów I rodzaju (False Positives – błędnie wytypował podium).
 
-**Wniosek końcowy**
+### 6. Wniosek końcowy
 
 Model wykazuje dobrą zdolność predykcyjną oraz stabilne wyniki w warunkach niezbalansowanych danych. Zastosowanie inżynierii cech oraz optymalizacji progu decyzyjnego poprawiło jakość klasyfikacji, szczególnie w zakresie wykrywania rzadkiej klasy (Top 3).
 
