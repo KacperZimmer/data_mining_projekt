@@ -83,7 +83,7 @@ Zamiast domyślnego progu 0.5 przeanalizowano różne wartości threshold w celu
 
 Domyślny próg klasyfikacji (0.5) obniżono do wartości 0.4, co pozwoliło uzyskać najlepszy kompromis pomiędzy kluczowymi metrykami jakości, w szczególności precision i recall.
 
-### 5. Wyniki modelu - tabela metryk
+## 5. Wyniki modelu - tabela metryk
 
 | **Metryka** | **Wartość** |
 | --- | --- |
