@@ -67,7 +67,6 @@ Aby zapobiec zjawisku przeuczenia (overfitting), zaimplementowano mechanizm **Ea
 
 Poniższe wykresy prezentują przebieg funkcji straty oraz celności w kolejnych epokach:
 
-![image.png](image.png)
 <img width="1009" height="451" alt="image" src="https://github.com/user-attachments/assets/b4199403-4fbe-4c5d-a4f5-7d015f36f434" />
 
 
@@ -121,7 +120,8 @@ weighted avg       0.89      0.88      0.88      2676
 
 W celu dogłębnej analizy struktury błędów wygenerowano macierz pomyłek (Confusion Matrix)
 
-![image.png](image%201.png)
+<img width="952" height="727" alt="image" src="https://github.com/user-attachments/assets/6ead2f42-51ba-48f9-a4f0-ccd32d7043ea" />
+
 
 Macierz przedstawia, że na 2336 przypadków braku podium, model prawidłowo wskazał 2147 z nich (True Negatives). 
 
