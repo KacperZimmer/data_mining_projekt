@@ -68,6 +68,8 @@ Aby zapobiec zjawisku przeuczenia (overfitting), zaimplementowano mechanizm **Ea
 Poniższe wykresy prezentują przebieg funkcji straty oraz celności w kolejnych epokach:
 
 ![image.png](image.png)
+<img width="1009" height="451" alt="image" src="https://github.com/user-attachments/assets/b4199403-4fbe-4c5d-a4f5-7d015f36f434" />
+
 
 **Wykres celności (Model Accuracy):** Pokazuje procent poprawnych typowań (ok. 88–89%). Wahania wartości na zbiorze walidacyjnym są naturalne i wynikają z losowego charakteru danych oraz nierównowagi klasowej, gdzie klasa pozytywna (Top 3) stanowi mniejszość obserwacji.
 
