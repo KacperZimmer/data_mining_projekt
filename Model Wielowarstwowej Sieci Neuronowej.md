@@ -83,7 +83,7 @@ Zamiast domyślnego progu 0.5 przeanalizowano różne wartości threshold w celu
 
 Domyślny próg klasyfikacji (0.5) obniżono do wartości 0.4, co pozwoliło uzyskać najlepszy kompromis pomiędzy kluczowymi metrykami jakości, w szczególności precision i recall.
 
-## 5. Wyniki modelu - tabela metryk
+**Wyniki modelu - tabela metryk**
 
 | **Metryka** | **Wartość** |
 | --- | --- |
@@ -127,7 +127,7 @@ Macierz przedstawia, że na 2336 przypadków braku podium, model prawidłowo wsk
 
 W klasie pozytywnej model poprawnie przewidział 208 podiów (True Positives), natomiast popełnił 132 błędy II rodzaju (False Negatives – nie wykrył podium) oraz 189 błędów I rodzaju (False Positives – błędnie wytypował podium).
 
-### 6. Wniosek końcowy
+### 5. Wniosek końcowy
 
 Model wykazuje dobrą zdolność predykcyjną oraz stabilne wyniki w warunkach niezbalansowanych danych. Zastosowanie inżynierii cech oraz optymalizacji progu decyzyjnego poprawiło jakość klasyfikacji, szczególnie w zakresie wykrywania rzadkiej klasy (Top 3).
 
