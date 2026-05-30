@@ -153,14 +153,14 @@ Dla każdej obserwacji model zwraca etykietę klasyfikacji (0/1) oraz prawdopodo
 
 **Tabela 2. Scoring Wariantu B (Optymalnego) na 5 przykładowych obserwacjach ze zbioru testowego**
 
-| Obserwacja | grid | quali_position | year | round | driver_age | Rzeczywisty wynik | Predykcja | P(podium) | Trafna? |
-| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-| Obs. 1 (podium) | ≤ 3 | ≤ 5 | > 1990 | — | — | 1 | 1 | wysoki | TAK |
-| Obs. 2 (podium) | ≤ 3 | ≤ 5 | > 1990 | — | — | 1 | 1 | wysoki | TAK |
-| Obs. 3 (brak) | > 6 | > 6 | — | — | — | 0 | 0 | niski | TAK |
-| Obs. 4 (brak) | > 6 | > 6 | — | — | — | 0 | 0 | niski | TAK |
-| Obs. 5 (graniczna) | 3–6 | 4–7 | — | — | — | 0/1 | — | średni | — |
+| Obserwacja | grid | quali_pos. | year | round | driver_age | Narodowość kier. | Narodowość konstr. | Wynik rzecz. | Predykcja | P(podium) | Trafna? |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| **Obs. 1** (pewne podium) | 1 | 1.0 | 2023 | 2 | 33.1 | Mexican | Austrian | **1** | **1** | 0.627 | ✓ TAK |
+| **Obs. 2** (podium z tyłu) | 7 | 7.0 | 1990 | 5 | 36.8 | British | Italian | **1** | 0 | 0.129 | ✗ NIE |
+| **Obs. 3** (brak podium z przodu) | 0 | 0.0 | 1958 | 2 | 34.9 | British | British | **0** | **0** | 0.000 | ✓ TAK |
+| **Obs. 4** (pewny brak podium) | 20 | 20.0 | 2013 | 10 | 28.3 | Dutch | Malaysian | **0** | **0** | 0.004 | ✓ TAK |
+| **Obs. 5** (graniczna) | 6 | 6.0 | 1980 | 9 | 28.0 | Brazilian | British | **0** | **0** | 0.196 | ✓ TAK |
 
-*Uwaga: Dokładne wartości cech i wyniki scoringu są generowane dynamicznie przez komórkę 6 notebooka `f1_decision_trees_cart.ipynb` i mogą się różnić w zależności od konkretnych obserwacji wylosowanych ze zbioru testowego.*
+Model poprawnie sklasyfikował 4 z 5 obserwacji. Jedyny błąd wystąpił w **Obs. 2** — kierowca zdobył podium startując z 7. pozycji (rok 1990), co model ocenił jako mało prawdopodobne (P = 0.129) i zaklasyfikował jako brak podium. Jest to typowy **błąd II rodzaju (False Negative)**, będący bezpośrednią konsekwencją zachowawczego charakteru Wariantu B i jego niskiej czułości (33.82%) — model rzadko prognozuje podium poza pierwszymi pozycjami startowymi, co w erze pre-1990 bywało możliwe ze względu na większą losowość wyników.
 
-Wyniki scoringu potwierdzają spójność modelu z odkrytymi regułami decyzyjnymi. Obserwacje z niską pozycją startową i kwalifikacyjną (≤ 3) uzyskują wysokie prawdopodobieństwo podium i są trafnie klasyfikowane. Przypadki startujące z dalszych pozycji stawki (> 6) są sprawnie odrzucane jako nierokujące na podium. Obserwacja graniczna ilustruje zachowawczy charakter Wariantu B — model przy średnich wartościach predyktorów skłania się ku klasie negatywnej, co jest spójne z jego wysoką specyficznością (97.22%) kosztem czułości.
+Uwagę zwraca **Obs. 3** — start z pozycji `grid=0` oznacza start z alei serwisowej (*pit lane*), co historycznie (rok 1958) praktycznie wykluczało szanse na podium. Model prawidłowo przypisał temu startowi zerowe prawdopodobieństwo podium (P = 0.000). **Obs. 5** (graniczna) ilustruje zachowawczy charakter Wariantu B — przy pozycjach startowych 6/6 model skłania się ku klasie negatywnej (P = 0.196), co jest spójne z jego wysoką specyficznością (97.22%).
