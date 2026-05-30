@@ -26,40 +26,40 @@ Zgodnie ze standardem oceny klasyfikatorów binarnej zmiennej celu, modele zosta
 
 | Wariant Modelu | Accuracy | Czułość (Sensitivity) | Specyficzność (Specificity) | AUC Score |
 | :--- | :---: | :---: | :---: | :---: |
-| **Wariant A (Pełne)** | 0.8506 | 0.4475 | 0.9093 | 0.6784 |
-| **Wariant B (Optymalne)** | **0.8884** | 0.3582 | **0.9655** | **0.8905** |
-| **Wariant C (Zbalansowane)** | 0.7899 | **0.8528** | 0.7807 | **0.8878** |
+| **Wariant A (Pełne)** | 0.8468 | 0.4324 | 0.9071 | 0.6697 |
+| **Wariant B (Optymalne)** | **0.8849** | 0.3529 | **0.9623** | **0.8891** |
+| **Wariant C (Zbalansowane)** | 0.7956 | **0.8529** | 0.7872 | **0.8871** |
 
 ### Szczegółowa analiza raportów klasyfikacji (Wariant B vs Wariant C)
 
-Warianty zoptymalizowane (B i C) osiągnęły bardzo wysokie wskaźniki **AUC (odpowiednio 0.8905 oraz 0.8878)**, co świadczy o wysokiej i stabilnej zdolności rozdzielczej modeli drzewiastych na danych tabularycznych Formuły 1. Kluczowe różnice ujawniają się jednak w rozkładzie błędów I i II rodzaju:
+Warianty zoptymalizowane (B i C) osiągnęły bardzo wysokie wskaźniki **AUC (odpowiednio 0.8891 oraz 0.8871)**, co świadczy o wysokiej i stabilnej zdolności rozdzielczej modeli drzewiastych na danych tabularycznych Formuły 1. Kluczowe różnice ujawniają się jednak w rozkładzie błędów I i II rodzaju:
 
 * **Wariant B (Optymalny – zorientowany na globalną celność):**
-  Model ten osiągnął najwyższą ogólną celność (**88.84%**) oraz doskonałą specyficzność (**96.55%**). Bardzo rzadko popełnia błąd typu I (False Positive) – rzadko błędnie typuje podium dla kierowcy, który go nie zdobędzie. Przekłada się to na precyzję (Precision) dla klasy pozytywnej na poziomie 60%. Główną wadą jest jednak niska czułość (**35.82%**) – model działa wysoce zachowawczo i pomija wiele rzeczywistych podiów.
+  Model ten osiągnął najwyższą ogólną celność (**88.49%**) oraz doskonałą specyficzność (**96.23%**). Bardzo rzadko popełnia błąd typu I (False Positive) – rzadko błędnie typuje podium dla kierowcy, który go nie zdobędzie. Przekłada się to na precyzję (Precision) dla klasy pozytywnej na poziomie 58%. Główną wadą jest jednak niska czułość (**35.29%**) – model działa wysoce zachowawczo i pomija wiele rzeczywistych podiów.
 
 ```text
                precision    recall  f1-score   support
 
-Brak Podium (0)       0.91      0.97      0.94      2336
-   Podium (1)       0.60      0.36      0.45       340
+Brak Podium (0)       0.91      0.96      0.94      2336
+   Podium (1)       0.58      0.35      0.44       340
 
-     accuracy                           0.89      2676
-    macro avg       0.76      0.66      0.69      2676
- weighted avg       0.87      0.89      0.88      2676
+     accuracy                           0.88      2676
+    macro avg       0.74      0.66      0.69      2676
+ weighted avg       0.87      0.88      0.87      2676
 ```
 
 * **Wariant C (Zbalansowane – zorientowany na wykrywanie podium):**
-  Poprzez automatyczną korektę wag klas, model drastycznie podniósł czułość dla klasy pozytywnej aż do poziomu **85.28%** (błędy typu II zostały zminimalizowane). Skutkuje to jednak spadkiem specyficzności do 78.07% i częstszym generowaniem fałszywych alarmów (błędów I rodzaju), co obniża precyzję klasy pozytywnej do 36% oraz globalne Accuracy do 78.99%.
+  Poprzez automatyczną korektę wag klas, model drastycznie podniósł czułość dla klasy pozytywnej aż do poziomu **85.29%** (błędy typu II zostały zminimalizowane). Skutkuje to jednak spadkiem specyficzności do 78.72% i częstszym generowaniem fałszywych alarmów (błędów I rodzaju), co obniża precyzję klasy pozytywnej do 37% oraz globalne Accuracy do 79.56%.
 
 ```text
                precision    recall  f1-score   support
 
-Brak Podium (0)       0.97      0.78      0.87      2336
-   Podium (1)       0.36      0.85      0.51       340
+Brak Podium (0)       0.97      0.79      0.87      2336
+   Podium (1)       0.37      0.85      0.51       340
 
-     accuracy                           0.79      2676
+     accuracy                           0.80      2676
     macro avg       0.67      0.82      0.69      2676
- weighted avg       0.90      0.79      0.82      2676
+ weighted avg       0.90      0.80      0.83      2676
 ```
 
 ## 4. Macierz pomyłek i analiza błędów
@@ -67,18 +67,18 @@ Brak Podium (0)       0.97      0.78      0.87      2336
 W celu bezpośredniego porównania struktur decyzyjnych w warunkach asymetrii klas (w próbie testowej znalazło się 2336 przypadków braku podium oraz 340 przypadków ukończenia wyścigu w TOP 3; łączna liczebność próby $N = 2676$), przeanalizowano liczbowe macierze pomyłek:
 
 * **Macierz pomyłek – Wariant B (Optymalne):**
-  * **True Negatives (Prawidłowy brak podium):** 2255 obserwacji
-  * **False Positives (Błędne wytypowanie podium – Błąd I rodzaju):** 81 obserwacji
-  * **False Negatives (Pominięte podium – Błąd II rodzaju):** 218 obserwacji
-  * **True Positives (Prawidłowo wykryte podium):** 122 obserwacje
+  * **True Negatives (Prawidłowy brak podium):** 2248 obserwacji
+  * **False Positives (Błędne wytypowanie podium – Błąd I rodzaju):** 88 obserwacji
+  * **False Negatives (Pominięte podium – Błąd II rodzaju):** 220 obserwacji
+  * **True Positives (Prawidłowo wykryte podium):** 120 obserwacji
 
 * **Macierz pomyłek – Wariant C (Zbalansowane):**
-  * **True Negatives (Prawidłowy brak podium):** 1824 obserwacje
-  * **False Positives (Błędne wytypowanie podium – Błąd I rodzaju):** 512 obserwacji
+  * **True Negatives (Prawidłowy brak podium):** 1839 obserwacje
+  * **False Positives (Błędne wytypowanie podium – Błąd I rodzaju):** 497 obserwacji
   * **False Negatives (Pominięte podium – Błąd II rodzaju):** 50 obserwacji
   * **True Positives (Prawidłowo wykryte podium):** 290 obserwacji
 
-Z perspektywy merytorycznej, wybór między modelami zależy od bezpośredniego celu stajni wyścigowej. Wariant B jest idealnym narzędziem konserwatywnym minimalizującym ryzyko błędnego wytypowania (gdy prognozuje podium, precyzja wynosi aż 60%). Wariant C z kolei idealnie nadaje się do szerokiego filtrowania kandydatów, bezbłędnie eliminując kierowców niemających żadnych szans na TOP 3 (tylko 50 pominiętych podiów na 2676 startów).
+Z perspektywy merytorycznej, wybór między modelami zależy od bezpośredniego celu stajni wyścigowej. Wariant B jest idealnym narzędziem konserwatywnym minimalizującym ryzyko błędnego wytypowania (gdy prognozuje podium, precyzja wynosi aż 58%). Wariant C z kolei idealnie nadaje się do szerokiego filtrowania kandydatów, bezbłędnie eliminując kierowców niemających żadnych szans na TOP 3 (tylko 50 pominiętych podiów na 2676 startów).
 
 ### Graficzna reprezentacja macierzy pomyłek
 
@@ -103,4 +103,4 @@ W celu interpretacji logicznej dokonanych przez model podziałów, poniżej prze
 Analiza tekstu reguł decyzyjnych oraz powyższej wizualizacji graficznej dla najlepszego modelu drzewiastego pozwoliła na bezpośrednie odkrycie wiedzy ekonomiczno-sportowej:
 
 1. **Priorytet Kwalifikacji:** Korzeń drzewa decyzyjnego dokonuje pierwszego podziału na podstawie cechy `quali_position <= 6.50` połączonej bezpośrednio z `grid <= 3.50`. Algorytm matematycznie udowodnił wyścigową regułę mówiącą, że start z pierwszych trzech pozycji drastycznie odseparowuje prawdopodobieństwo sukcesu od reszty stawki.
-2. **Ewolucja Technologiczna:** Pojawienie się w strukturze progów historycznych (np. `year <= 1987.50`) udowadnia, że drzewo decyzyjne doskonale zinterpretowało ewolucję Formuły 1. W nowoczesnej erze (wysoka bezawaryjność bolidów), wysoka pozycja startowa jest niemal bezpośrednim gwarantem dowiezienia podium, podczas gdy w latach 70. i 80. gigantyczna losowość mechaniczna silników niszczyła przewagę uzyskaną w kwalifikacjach.
+2. **Ewolucja Technologiczna:** Pojawienie się w strukturze progów historycznych (np. `year <= 1986.50`) udowadnia, że drzewo decyzyjne doskonale zinterpretowało ewolucję Formuły 1. W nowoczesnej erze (wysoka bezawaryjność bolidów), wysoka pozycja startowa jest niemal bezpośrednim gwarantem dowiezienia podium, podczas gdy w latach 70. i 80. gigantyczna losowość mechaniczna silników niszczyła przewagę uzyskaną w kwalifikacjach.
