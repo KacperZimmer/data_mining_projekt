@@ -67,8 +67,6 @@ Aby zapobiec zjawisku przeuczenia (overfitting), zaimplementowano mechanizm **Ea
 
 Poniższe wykresy prezentują przebieg funkcji straty oraz celności w kolejnych epokach:
 
-<img width="1009" height="451" alt="image" src="https://github.com/user-attachments/assets/b4199403-4fbe-4c5d-a4f5-7d015f36f434" />
-
 
 **Wykres celności (Model Accuracy):** Pokazuje procent poprawnych typowań (ok. 88–89%). Wahania wartości na zbiorze walidacyjnym są naturalne i wynikają z losowego charakteru danych oraz nierównowagi klasowej, gdzie klasa pozytywna (Top 3) stanowi mniejszość obserwacji.
 
@@ -119,8 +117,6 @@ weighted avg       0.89      0.88      0.88      2676
 **Macierz pomyłek dla modelu predykcji podium F1**
 
 W celu dogłębnej analizy struktury błędów wygenerowano macierz pomyłek (Confusion Matrix)
-
-<img width="952" height="727" alt="image" src="https://github.com/user-attachments/assets/6ead2f42-51ba-48f9-a4f0-ccd32d7043ea" />
 
 
 Macierz przedstawia, że na 2336 przypadków braku podium, model prawidłowo wskazał 2147 z nich (True Negatives). 

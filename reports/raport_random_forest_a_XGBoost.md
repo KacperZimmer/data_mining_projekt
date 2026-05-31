@@ -1,100 +1,44 @@
-**Porównanie XGBoost z Random Forest**
+# Porównanie XGBoost z Random Forest
 
-Porównując XGBoost z wcześniej analizowanym Random Forest, można wskazać
-kilka istotnych różnic.
+Porównując XGBoost z wcześniej analizowanym Random Forest, można wskazać kilka istotnych różnic.
 
-**Skuteczność**
+## 1. Skuteczność
 
-XGBoost uzyskał:
+| Metryka | XGBoost | Random Forest | Lepszy model |
+| :--- | :--- | :--- | :--- |
+| **Accuracy (Dokładność)** | **0.8935** | 0.8842 | **XGBoost** |
+| **AUC** | **0.8975** | 0.8910 | **XGBoost** |
 
-- accuracy na teście: 0.8935
+Oznacza to, że XGBoost w tym przypadku okazał się nieco lepszy. Różnica nie jest ogromna, ale jest zauważalna i wyraźnie przemawia na korzyść podejścia opartego na boostingu.
 
-- AUC na teście: 0.8975
+## 2. Kluczowe różnice
 
-Random Forest, w poprzedniej analizie, osiągał:
+* **Stabilność:** XGBoost wykazał bardzo stabilne wyniki walidacji krzyżowej (*cross-validation*), gdzie wszystkie foldy były do siebie zbliżone. Random Forest również radził sobie dobrze, ale XGBoost okazał się bardziej konsekwentny w rozpoznawaniu wzorców.
+* **Zdolność modelowania zależności:** XGBoost, jako metoda sekwencyjna (boostingowa), lepiej koryguje błędy popełnione w poprzednich krokach i z reguły osiąga wyższą jakość predykcji na danych tabelarycznych. W tym projekcie to właśnie ta cecha najprawdopodobniej pozwoliła na uzyskanie lepszych rezultatów niż w przypadku lasów losowych.
+* **Interpretacja cech:** W obu modelach najważniejsze okazały się zmienne `quali_position` i `grid`, jednak w XGBoost ich dominacja była jeszcze wyraźniejsza. Sugeruje to, że model ten lepiej „wyostrzył” zależność między wynikiem kwalifikacji a ostateczną szansą na podium.
 
-- accuracy około 0.8842
+---
 
-- AUC około 0.8910
+## 3. Wniosek końcowy: Który model jest lepszy?
 
-Oznacza to, że XGBoost w tym przypadku okazał się nieco lepszy. Różnica
-nie jest ogromna, ale jest zauważalna i przemawia na korzyść
-boostingowego podejścia.
+Na podstawie przedstawionych wyników można stwierdzić, że **XGBoost jest lepszym modelem dla tych danych niż Random Forest**.
 
-Stabilność
+**Argumenty przemawiające za XGBoost:**
 
-XGBoost wykazał bardzo stabilne wyniki cross-validation, wszystkie foldy
-były zbliżone. Random Forest również był dobry, ale XGBoost wydaje się
-bardziej konsekwentny w rozpoznawaniu wzorców.
+1. **Wyższa dokładność testowa:** Osiągnął wartość 0.8935, podczas gdy Random Forest cechował się nieco niższą skutecznością.
+2. **Wyższe AUC:** Uzyskał wynik 0.8975, co oznacza lepszą ogólną zdolność rozróżniania klas.
+3. **Bardziej stabilna walidacja krzyżowa:** Zbliżone do siebie wyniki poszczególnych foldów sugerują solidną zdolność uogólniania (generalizacji) modelu.
+4. **Lepsza krzywa uczenia:** Wykres *learning curve* dowodzi, że model bardzo sprawnie uczy się na danych treningowych, a najlepszą jakość walidacyjną osiąga już przy umiarkowanej liczbie drzew.
+5. **Silniejsza identyfikacja kluczowych cech:** XGBoost jeszcze dobitniej podkreślił znaczenie cech `quali_position` oraz `grid`, co w pełni pokrywa się z logiką problemu badawczego.
 
-Zdolność modelowania zależności
+> **Warto zaznaczyć:** Random Forest również był dobrym modelem i stanowił rzetelną bazę porównawczą. Jest to algorytm prostszy, bardziej intuicyjny i przeważnie mniej wymagający w kontekście strojenia hiperparametrów. Niemniej jednak, w analizowanym zadaniu XGBoost skuteczniej wykorzystał sygnał zawarty w danych, zapewniając wyższą jakość predykcji.
 
-XGBoost, jako metoda boostingowa, lepiej koryguje błędy poprzednich
-kroków i często osiąga wyższą jakość predykcji na danych tabelarycznych.
-W tym projekcie to właśnie ta cecha najprawdopodobniej pozwoliła uzyskać
-lepsze wyniki niż w Random Forest.
+---
 
-Interpretacja cech
+## 4. Podsumowanie
 
-W obu modelach najważniejsze były quali_position i grid, ale w XGBoost
-ich dominacja była jeszcze wyraźniejsza. To sugeruje, że model
-boostingowy lepiej „wyostrzył" zależność między wynikiem kwalifikacji a
-szansą na podium.
+**XGBoost** okazał się wysoce skuteczną metodą predykcji miejsc na podium w wyścigach Formuły 1. Algorytm osiągnął wysoką dokładność oraz bardzo dobre AUC, a kształt krzywej ROC ostatecznie potwierdził jego zdolność do poprawnej separacji klas. 
 
-Wniosek końcowy: który model jest lepszy?
+Analiza krzywej uczenia wskazała na istnienie optymalnej liczby drzew, powyżej której dalsze zwiększanie złożoności nie przekłada się na poprawę jakości testowej. Z kolei ranking ważności cech udowodnił, że kluczowe znaczenie mają wyniki kwalifikacji oraz pozycja startowa — a więc zmienne bezpośrednio odzwierciedlające faktyczny potencjał sportowy kierowcy podczas weekendu wyścigowego.
 
-Na podstawie przedstawionych wyników można stwierdzić, że **XGBoost jest
-lepszym modelem dla tych danych niż Random Forest**.
-
-Argumenty przemawiające za XGBoost:
-
-1.  Wyższa dokładność testowa
-    XGBoost osiągnął 0.8935, podczas gdy Random Forest miał niższą
-    skuteczność.
-
-2.  Wyższe AUC
-    XGBoost uzyskał 0.8975, czyli lepszą zdolność rozróżniania klas.
-
-3.  Bardziej stabilna walidacja krzyżowa
-    Wyniki foldów były bardzo zbliżone, co sugeruje solidną
-    generalizację.
-
-4.  Lepsza krzywa uczenia
-    Wykres learning curve pokazuje, że model bardzo dobrze uczy się na
-    danych treningowych, a przy umiarkowanej liczbie drzew osiąga
-    najlepszą jakość na danych walidacyjnych.
-
-5.  Silniejsza identyfikacja najważniejszych cech
-    XGBoost jeszcze mocniej podkreślił znaczenie quali_position i grid,
-    co jest zgodne z logiką problemu.
-
-Jednocześnie należy zaznaczyć:
-
-Random Forest również był dobrym modelem i stanowił bardzo rozsądną bazę
-porównawczą. Jest prostszy, bardziej intuicyjny i zwykle mniej
-wymagający w strojenia. Jednak w tym konkretnym zadaniu XGBoost lepiej
-wykorzystał sygnał zawarty w danych i zapewnił wyższą jakość predykcji.
-
-Podsumowanie
-
-XGBoost okazał się bardzo skuteczną metodą predykcji miejsc na podium w
-wyścigach Formuły 1. Model osiągnął wysoką dokładność i bardzo dobre
-AUC, a wykres ROC potwierdził jego zdolność do rozróżniania klas.
-Analiza learning curve wskazała, że istnieje optymalna liczba drzew, po
-której dalsze zwiększanie złożoności nie poprawia jakości testowej.
-Ranking cech pokazał, że kluczowe znaczenie mają przede wszystkim wyniki
-kwalifikacji i pozycja startowa, czyli zmienne bezpośrednio związane z
-potencjałem sportowym kierowcy.
-
-W porównaniu z Random Forest model XGBoost wypadł korzystniej, zarówno
-pod względem skuteczności, jak i stabilności. Z tego względu można
-uznać, że dla tego konkretnego zbioru danych i celu predykcyjnego
-XGBoost jest rozwiązaniem bardziej efektywnym. Jest to dobry przykład
-tego, że choć oba modele należą do rodziny metod opartych na drzewach,
-to ich mechanizm działania prowadzi do nieco innych własności, a
-boosting często daje przewagę w zadaniach predykcyjnych na danych
-tabelarycznych.
-
-Jeśli chcesz, mogę teraz przygotować z tego **wersję formalną do pracy,
-bez nagłówków i z bardziej płynnym stylem akademickim**, tak jak
-wcześniej dla Random Forest.
+W bezpośrednim porównaniu z Random Forest, to model **XGBoost wypadł korzystniej** (zarówno pod względem skuteczności, jak i stabilności). Stanowi to doskonały przykład tego, jak mechanizm sekwencyjnego uczenia (boosting) przeważa w zadaniach predykcyjnych opartych na danych tabelarycznych, co ostatecznie czyni XGBoost rozwiązaniem bardziej efektywnym dla niniejszego zbioru danych.
