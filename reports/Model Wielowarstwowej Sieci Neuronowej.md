@@ -73,7 +73,24 @@ Poniższe wykresy prezentują przebieg funkcji straty oraz celności w kolejnych
 **Wykres straty (Model Loss):** Pokazuje, jak szybko sieć uczy się na błędach. Obie linie (niebieska i pomarańczowa) systematycznie spadają, co oznacza, że model działa poprawnie. Ponieważ linia walidacyjna (pomarańczowa) pod koniec nie rośnie, mamy pewność, że model nie jest przeuczony i dobrze poradzi sobie z nowymi danymi.  
 Mechanizm **Early Stopping** zakończył proces uczenia w 19 epoce, w momencie gdy dalsze epoki nie przynosiły poprawy na zbiorze walidacyjnym. Pozwoliło to na wybór modelu o najlepszej dostępnej jakości uogólnienia bez ryzyka overfittingu.
 
-## 4. Analiza wyników i ocena jakości modelu (Scoring)
+## 4. Optymalizacja architektury modelu
+
+W trakcie realizacji projektu przetestowano kilka wariantów architektury sieci neuronowej oraz parametrów uczenia w celu uzyskania jak najlepszych wyników predykcyjnych.
+
+Analizowany był wpływ następujących modyfikacji:
+
+- liczby neuronów w warstwach ukrytych
+- wartości współczynnika Dropout
+- zastosowania regularyzacji L2
+- wag klas (class weighting)
+- dodatkowych cech utworzonych w procesie feature engineering
+- wartości progu klasyfikacji (threshold)
+
+Następnie porównano uzyskane w każdym modelu wartości Accuracy, Precision, Recall, F1-score oraz ROC-AUC. Największą poprawę jakości modelu zaobserwowano po zastosowaniu dodatkowych cech opisujących relacje pomiędzy pozycją startową a wynikami kwalifikacji oraz po optymalizacji wag klas i progu decyzyjnego.
+
+Ostatecznie wybrano model uzyskujący najlepszy kompromis pomiędzy wykrywaniem przypadków klasy Top 3 (Recall) a trafnością predykcji (Precision).
+
+## 5. Analiza wyników i ocena jakości modelu (Scoring)
 
 Końcowy scoring modelu został przeprowadzony na odłożonym zbiorze testowym. 
 
