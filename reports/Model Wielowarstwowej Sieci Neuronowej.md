@@ -67,7 +67,7 @@ Aby zapobiec zjawisku przeuczenia (overfitting), zaimplementowano mechanizm **Ea
 
 Poniższe wykresy prezentują przebieg funkcji straty oraz celności w kolejnych epokach:
 
-![Wykres accuracy i loss](../Plots/accuracy_loss.png)
+![Wykres accuracy i loss](Plots/accuracy_loss.png)
 
 **Wykres celności (Model Accuracy):** Pokazuje procent poprawnych typowań (ok. 88–89%). Wahania wartości na zbiorze walidacyjnym są naturalne i wynikają z losowego charakteru danych oraz nierównowagi klasowej, gdzie klasa pozytywna (Top 3) stanowi mniejszość obserwacji.
 
@@ -136,12 +136,13 @@ weighted avg       0.89      0.88      0.88      2676
 
 W celu dogłębnej analizy struktury błędów wygenerowano macierz pomyłek (Confusion Matrix)
 
+![Macierz pomyłek](Plots/ConfusionMatrixNN.png)
 
 Macierz przedstawia, że na 2336 przypadków braku podium, model prawidłowo wskazał 2147 z nich (True Negatives). 
 
 W klasie pozytywnej model poprawnie przewidział 208 podiów (True Positives), natomiast popełnił 132 błędy II rodzaju (False Negatives – nie wykrył podium) oraz 189 błędów I rodzaju (False Positives – błędnie wytypował podium).
 
-### 5. Wniosek końcowy
+### 6. Wniosek końcowy
 
 Model wykazuje dobrą zdolność predykcyjną oraz stabilne wyniki w warunkach niezbalansowanych danych. Zastosowanie inżynierii cech oraz optymalizacji progu decyzyjnego poprawiło jakość klasyfikacji, szczególnie w zakresie wykrywania rzadkiej klasy (Top 3).
 
