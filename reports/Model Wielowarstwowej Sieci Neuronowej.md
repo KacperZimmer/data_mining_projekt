@@ -67,6 +67,8 @@ Aby zapobiec zjawisku przeuczenia (overfitting), zaimplementowano mechanizm **Ea
 
 Poniższe wykresy prezentują przebieg funkcji straty oraz celności w kolejnych epokach:
 
+<img width="1009" height="451" alt="image" src="https://github.com/user-attachments/assets/e89668fc-ed73-4133-8a5c-e186cf24d8d6" />
+
 
 **Wykres celności (Model Accuracy):** Pokazuje procent poprawnych typowań (ok. 88–89%). Wahania wartości na zbiorze walidacyjnym są naturalne i wynikają z losowego charakteru danych oraz nierównowagi klasowej, gdzie klasa pozytywna (Top 3) stanowi mniejszość obserwacji.
 
@@ -135,6 +137,7 @@ weighted avg       0.89      0.88      0.88      2676
 
 W celu dogłębnej analizy struktury błędów wygenerowano macierz pomyłek (Confusion Matrix)
 
+<img width="952" height="727" alt="image" src="https://github.com/user-attachments/assets/da132f58-7065-4f47-902e-3ecaa9017992" />
 
 Macierz przedstawia, że na 2336 przypadków braku podium, model prawidłowo wskazał 2147 z nich (True Negatives). 
 
